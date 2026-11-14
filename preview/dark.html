@@ -1,0 +1,131 @@
+<!doctype html><html class="dark"><head><meta charset="utf-8"><style>
+html,body{margin:0} html{padding:0!important;--background:#38352d;--sidebar:#302e27}
+.app{display:grid;grid-template-columns:250px 1fr;height:640px;font:13px/1.5 var(--font-sans);color:#dad4bb;background:#38352d;border:1px solid #5f5b4e}
+[data-slot=sidebar-inner]{background:#302e27;height:100%;padding:10px 12px 10px 8px;box-sizing:border-box;color:#dad4bb}
+.proj{display:flex;gap:8px;align-items:center;margin:12px 0 4px;color:#a39e89;font-size:12px}
+li{list-style:none} ul{margin:0;padding:0}
+.row{display:flex;justify-content:space-between;padding:5px 8px;color:#a39e89}
+.row:hover{background:#3d3a32}
+.row[data-active=true]{background:#4d493e;color:#dad4bb;font-weight:500}
+main{position:relative;display:flex;flex-direction:column;min-width:0}
+[data-chat-header]{position:relative;height:40px;box-sizing:border-box;padding:0 16px;display:flex;justify-content:space-between;align-items:center;background:#38352d}
+.tl{flex:1;padding:18px 40px 18px 250px;overflow:hidden}
+[data-user-message-bubble]{background:#dad4bb;color:#38352d;padding:9px 13px;max-width:70%;margin-left:auto;width:fit-content}
+.chat-markdown{max-width:620px;margin-top:18px} .chat-markdown h2{font-size:16px;margin:0 0 8px}
+.chat-markdown p{margin:8px 0} .chat-markdown code{background:#2e2c25;padding:1px 4px;font-size:12px}
+.chat-markdown-codeblock{background:#2e2c25;color:#dad4bb;padding:10px 12px;font:12px/1.5 ui-monospace,monospace;margin:10px 0}
+.muted{color:#aaa590}
+[data-slot=composer-host]{margin:0 40px 22px 250px;background:#403d34;padding:10px 12px}
+.composer-tiptap{color:#8a8573;min-height:38px}
+.bar{display:flex;gap:6px;justify-content:space-between}
+[data-slot=button]{border:1px solid #5f5b4e;background-color:transparent;color:#dad4bb;padding:3px 9px;font:inherit;font-size:12px;cursor:pointer}
+[data-slot=button].pri{background-color:#dad4bb;color:#38352d;border-color:#dad4bb}
+[data-slot=menu-popup]{position:absolute;right:56px;top:58px;background:#454138;width:190px;padding:4px}
+[data-slot=menu-popup] div{padding:5px 9px}
+.err{color:#e58a72} .ok{color:#9dbfb2} .warn{color:#d9b45b}
+/* YoRHa: a NieR: Automata inspired theme for T3 Code */
+:root{--radius:0px;--font-sans:"Helvetica Neue",Helvetica,"Nimbus Sans","Liberation Sans",Arial,sans-serif;--n-band:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='11'%3E%3Cg fill='%234e4b42'%3E%3Crect width='38' height='1'/%3E%3Crect y='2' width='7' height='2'/%3E%3Crect x='18' y='5' width='2' height='2'/%3E%3Crect x='24' y='5' width='2' height='2'/%3E%3Crect x='21' y='9' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E");--n-art:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' fill='none' stroke='%238a8573' stroke-opacity='.2'%3E%3Ccircle cx='380' cy='-120' r='600'/%3E%3Ccircle cx='1560' cy='860' r='440'/%3E%3Cpath d='M0 640 640 0M720 900 1560 60M900 900 1600 200M0 560 1600 470'/%3E%3C/svg%3E");--n-log:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='264' font-family='monospace' font-size='10' letter-spacing='1' fill='%238a8573' fill-opacity='.55'%3E%3Ctext y='14'%3ESYSTEM CHECK .......... OK%3C/text%3E%3Ctext y='36'%3EMEMORY UNIT ........ GREEN%3C/text%3E%3Ctext y='58'%3EVITALS ............. GREEN%3C/text%3E%3Ctext y='80'%3EBLACK BOX TEMP .... NORMAL%3C/text%3E%3Ctext y='102'%3EIFF ............... ACTIVE%3C/text%3E%3Ctext y='124'%3EFCS ............... ACTIVE%3C/text%3E%3Ctext y='146'%3EPOD LINK ........... GREEN%3C/text%3E%3Ctext y='168'%3ELOG SYNC ............ DONE%3C/text%3E%3Ctext y='190'%3E.:. .:. .:. .:. .:. .:. .:%3C/text%3E%3Ctext y='212'%3ETHREAD ........... STANDBY%3C/text%3E%3Ctext y='234'%3EINPUT ............ WAITING%3C/text%3E%3Ctext y='256'%3EGLORY TO MANKIND%3C/text%3E%3C/svg%3E");--n-ink:#4e4b42;--n-bone:#dad4bb;--n-shade:#b4af9a;--n-line:rgba(78,75,66,.38);--n-grid:#c3bea6;--n-vig:rgba(78,75,66,.14);--n-drop:rgba(78,75,66,.26);--n-rust:#cd664d}
+.dark{--n-ink:#dad4bb;--n-bone:#38352d;--n-shade:#6b6759;--n-line:rgba(218,212,187,.3);--n-grid:#3d3a32;--n-vig:rgba(0,0,0,.28);--n-drop:rgba(0,0,0,.38);--n-band:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='11'%3E%3Cg fill='%23dad4bb'%3E%3Crect width='38' height='1'/%3E%3Crect y='2' width='7' height='2'/%3E%3Crect x='18' y='5' width='2' height='2'/%3E%3Crect x='24' y='5' width='2' height='2'/%3E%3Crect x='21' y='9' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E")}
+
+/* square corners everywhere, like the in-game menus */
+*,*::before,*::after{border-radius:0!important}
+body{letter-spacing:.03rem;word-spacing:.06em}
+:is(code,pre,kbd,.chat-markdown-codeblock){letter-spacing:0}
+::selection{background:var(--n-ink);color:var(--n-bone)}
+svg.lucide{stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+
+/* chat area: fine grid, screen vignette, drifting linework and a scrolling system log */
+[data-workspace-area="conversation"]{isolation:isolate;overflow:clip;background-image:radial-gradient(ellipse at 50% 45%,transparent 55%,var(--n-vig) 130%),linear-gradient(var(--n-grid) 1px,transparent 1px),linear-gradient(90deg,var(--n-grid) 1px,transparent 1px)!important;background-size:100% 100%,.3rem .3rem,.3rem .3rem!important}
+[data-workspace-area="conversation"]::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:var(--n-art) center/cover no-repeat;will-change:transform;animation:n-drift 70s ease-in-out infinite alternate}
+[data-workspace-area="conversation"]::after{content:"";position:absolute;left:18px;top:0;width:200px;height:calc(100% + 264px);z-index:-1;pointer-events:none;background:var(--n-log) repeat-y;will-change:transform;animation:n-log 44s linear infinite}
+[data-chat-header]{letter-spacing:.05em}
+[data-chat-header]::after{content:"";position:absolute;left:0;right:0;top:100%;height:11px;background:var(--n-band) repeat-x;pointer-events:none;z-index:1}
+
+/* sidebar: double rule on the edge, inverted selected row */
+[data-slot="sidebar-inner"]{background-image:linear-gradient(var(--n-grid) 1px,transparent 1px),linear-gradient(90deg,var(--n-grid) 1px,transparent 1px);background-size:.3rem .3rem;box-shadow:inset -1px 0 0 var(--n-line),inset -4px 0 0 var(--sidebar),inset -5px 0 0 var(--n-line);letter-spacing:.02em}
+[data-thread-item]{transition:box-shadow .16s ease-out}
+[data-thread-item]:hover{box-shadow:inset 3px 0 0 var(--n-ink),inset 5px 0 0 var(--sidebar),inset 6px 0 0 var(--n-ink)}
+[data-slot="sidebar"] [data-active="true"]{background-color:var(--n-ink)!important;color:var(--n-bone)!important}
+[data-thread-item] [aria-current]:not([aria-current="false"]){background-image:linear-gradient(var(--n-ink),var(--n-ink))!important;background-repeat:no-repeat!important;background-size:100% 100%;color:var(--n-bone)!important;box-shadow:0 -2px 0 var(--sidebar),0 -3px 0 var(--n-ink),0 2px 0 var(--sidebar),0 3px 0 var(--n-ink);animation:n-fill .2s ease-out}
+:is([data-slot="sidebar"] [data-active="true"],[data-thread-item] [aria-current]:not([aria-current="false"])) :is(span,p,time,div,svg.lucide){color:var(--n-bone)!important}
+[data-slot="project-monogram"] svg{filter:grayscale(1) sepia(.35) contrast(.9)}
+
+/* messages */
+.chat-markdown :is(h1,h2,h3){font-weight:500;letter-spacing:.06em}
+.chat-markdown h1{letter-spacing:.22em;text-shadow:.09em .16em 0 var(--n-shade)}
+.chat-markdown h2{padding:.2em .7em;border:solid var(--n-ink);border-width:1px 0}
+.chat-markdown h3::before{content:"";display:inline-block;width:.55em;height:.55em;margin-right:.55em;background:currentColor;vertical-align:.06em}
+.chat-markdown blockquote{border-left:0!important;padding-left:1.4em!important;background:linear-gradient(90deg,var(--n-shade) 0 .4em,transparent .4em .6em,var(--n-shade) .6em .72em,transparent .72em)}
+.chat-markdown a{color:var(--n-ink)!important;text-decoration:underline;text-decoration-color:var(--n-shade);text-underline-offset:3px}
+.chat-markdown a:hover{background:var(--n-ink);color:var(--n-bone)!important}
+.chat-markdown kbd{background:var(--n-ink)!important;color:var(--n-bone)!important;border:0!important;padding:0 .4em}
+.chat-markdown hr{border:0;height:5px;border-top:1px solid var(--n-line);border-bottom:1px solid var(--n-line)}
+.chat-markdown-codeblock{border:1px solid var(--n-line)!important;border-left:3px solid var(--n-ink)!important}
+.chat-markdown th{background:var(--n-ink)!important;color:var(--n-bone)!important;font-weight:500;letter-spacing:.04em}
+
+/* panels: thin border and a hard offset shadow */
+[data-slot="composer-host"]{--s:var(--n-shade);border:1px solid transparent!important;box-shadow:4px 4px 0 var(--n-drop)!important;background-image:linear-gradient(var(--s),var(--s)),linear-gradient(90deg,var(--s) 0 5px,transparent 5px 7px,var(--s) 7px 8px,transparent 8px)!important;background-size:5px 5px,100% 100%;background-position:right 2px bottom 2px,left bottom!important;background-repeat:no-repeat!important}
+.dark [data-slot="composer-host"]{border-color:var(--n-line)!important}
+[data-slot="composer-host"]:focus-within{--s:var(--n-ink);animation:n-rise .25s ease-out}
+.composer-tiptap{caret-color:var(--n-rust)}
+[data-thread-details-card]{border:1px solid var(--n-line)!important;box-shadow:4px 4px 0 var(--n-drop)!important}
+:is([data-slot="popover-popup"],[data-slot="menu-popup"]){border:1px solid var(--n-ink)!important;box-shadow:4px 4px 0 var(--n-drop)!important}
+[data-slot="dialog-popup"]{border:1px solid var(--n-ink)!important;border-top-width:14px!important;box-shadow:8px 8px 0 var(--n-drop)!important}
+:is([data-slot="popover-popup"],[data-slot="menu-popup"],[data-slot="dialog-popup"]){animation:n-open .18s ease-out}
+[data-slot="tooltip-popup"]{border:1px solid var(--n-ink)!important;box-shadow:3px 3px 0 var(--n-drop)!important}
+[data-slot="menu-popup"] :is([data-highlighted],[role^="menuitem"]:hover){background-color:var(--n-ink)!important;color:var(--n-bone)!important}
+[data-slot="menu-popup"] :is([data-highlighted],[role^="menuitem"]:hover) :is(span,svg,kbd){color:var(--n-bone)!important}
+
+/* controls: the fill sweeps in from the left, like the menu cursor */
+[data-slot="button"]:not(:disabled):not([data-disabled]):not([aria-disabled="true"]){background-image:linear-gradient(var(--n-ink),var(--n-ink));background-repeat:no-repeat;background-size:0 100%;transition:background-size .18s ease-out,color .12s}
+[data-slot="button"]:not(:disabled):not([data-disabled]):not([aria-disabled="true"]):hover{background-size:100% 100%;color:var(--n-bone)!important}
+[data-slot="button"]:not(:disabled):not([data-disabled]):not([aria-disabled="true"]):hover :is(span,svg){color:var(--n-bone)!important}
+:is([data-slot="input"],[data-slot="select-trigger"]){box-shadow:inset 0 -1px 0 var(--n-ink)!important}
+[data-slot="switch"]{border:1px solid var(--n-ink)!important}
+[data-settings-page-scroll] :is(h1,h2,h3){letter-spacing:.05em;font-weight:500}
+:focus-visible{outline-color:var(--n-rust)}
+
+/* scrollbars */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--n-shade);border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--n-ink);background-clip:content-box}
+[data-slot="scroll-area-thumb"]{background:var(--n-shade)!important}
+[data-slot="scroll-area-thumb"]:hover{background:var(--n-ink)!important}
+
+@keyframes n-drift{from{transform:translate3d(-5%,-3%,0) rotate(-3deg)}to{transform:translate3d(5%,3%,0) rotate(4deg)}}
+@keyframes n-log{to{transform:translate3d(0,-264px,0)}}
+@keyframes n-fill{from{background-size:0 100%}}
+@keyframes n-rise{from{background-size:5px 5px,100% 0}}
+@keyframes n-open{from{clip-path:inset(50% -12px)}to{clip-path:inset(-12px)}}
+@media (prefers-reduced-motion:reduce){[data-slot="button"],[data-thread-item]{transition:none!important}*{animation:none!important}}
+
+/* previews are static: freeze the animations */
+*,*::before,*::after{animation:none!important}
+</style></head><body><div class="app" style="position:relative">
+<div data-slot="sidebar"><div data-slot="sidebar-inner">
+ <div style="display:flex;justify-content:space-between;align-items:center"><b style="letter-spacing:.08em">T3 Code</b><button data-slot="button">New thread</button></div>
+ <div class="proj"><span data-slot="project-monogram" style="display:inline-grid;place-items:center;width:18px;height:18px;background:#454138;font-size:9px">AT</span>atlas</div>
+ <ul><li data-thread-item><div class="row" aria-current="page"><span>YoRHa theme</span><span>2m</span></div></li>
+ <li data-thread-item><div class="row"><span>Fix the login redirect</span><span>1h</span></div></li>
+ <li data-thread-item><div class="row"><span>Weekly metrics report</span><span>3h</span></div></li></ul>
+ <div class="proj"><span data-slot="project-monogram" style="display:inline-grid;place-items:center;width:18px;height:18px;background:#454138;font-size:9px">BC</span>beacon</div>
+ <ul><li data-thread-item><div class="row"><span>Migrate the job queue</span><span>1d</span></div></li>
+ <li data-thread-item><div class="row"><span>Review pull request #212</span><span>2d</span></div></li></ul>
+</div></div>
+<main data-workspace-area="conversation">
+ <div data-chat-header><span>YoRHa theme</span><span style="display:flex;gap:6px"><button data-slot="button">Diff</button><button data-slot="button">Terminal</button></span></div>
+ <div class="tl">
+  <div data-user-message-bubble>Make a custom theme inspired by NieR: Automata.</div>
+  <div class="chat-markdown">
+   <h1 style='font-size:19px;margin:0 0 12px'>YoRHa</h1><h2>Theme applied</h2><blockquote style='margin:8px 0;padding:4px 0'>Systematic and sterile, but also beautiful.</blockquote><h3 style='font-size:13px;margin:10px 0 4px'>How to undo</h3>
+   <p>The <code>yorha</code> theme changes the palette and squares every corner. <span class="muted">The selected sidebar row is inverted.</span></p>
+   <div class="chat-markdown-codeblock">python3 build.py<br><span class="ok">ok</span> theme built &nbsp; <span class="warn">1 warning</span> &nbsp; <span class="err">0 errors</span></div>
+   <p>To go back, pick a <a href='#'>built-in theme</a> in the settings.</p>
+  </div>
+ </div>
+ <div data-slot="composer-host"><div class="composer-tiptap">Ask for a change…</div>
+  <div class="bar"><span style="display:flex;gap:6px"><button data-slot="button">Fable 5.2</button><button data-slot="button">High</button></span><button data-slot="button" class="pri">Send</button></div></div>
+</main>
+<div data-slot="menu-popup"><div>Rename</div><div data-highlighted>Pin thread</div><div>Archive</div></div>
+</div></body></html>
