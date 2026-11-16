@@ -7,7 +7,7 @@ It has a light variant based on the game's menu and a dark variant built from th
 
 ![Dark variant](preview/dark.png)
 
-The screenshots are static mockups built by `build.py`, not captures of the app.
+Screenshots of the T3 Code nightly of November 2026 with the theme installed, taken from a demo project.
 
 ## What it changes
 
@@ -36,7 +36,8 @@ A font you picked in the T3 Code settings takes precedence.
 python3 build.py
 ```
 
-This rewrites `yorha.theme.json` and the HTML previews in `preview/`.
+This rewrites `yorha.theme.json` and the HTML mockups in `preview/`, which are a quick way to check the CSS without the app.
+The mockups are not the app's real layout; the PNG screenshots are.
 T3 Code limits a theme's CSS to 20,000 characters; the script prints the current size.
 
 ## Where the values come from
