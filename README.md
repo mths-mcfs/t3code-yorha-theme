@@ -7,7 +7,7 @@ It has a light variant based on the game's menu and a dark variant built from th
 
 ![Dark variant](preview/dark.png)
 
-Screenshots of the T3 Code nightly of November 2026 with the theme installed, taken from a demo project.
+Screenshots of an empty chat in the T3 Code nightly of November 2026, with the theme installed.
 
 ## What it changes
 

@@ -11,6 +11,8 @@ svg.lucide{stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
 
 /* chat area: fine grid, screen vignette, drifting linework and a scrolling system log */
 [data-workspace-area="conversation"]{isolation:isolate;overflow:clip;background-image:radial-gradient(ellipse at 50% 45%,transparent 55%,var(--n-vig) 130%),linear-gradient(var(--n-grid) 1px,transparent 1px),linear-gradient(90deg,var(--n-grid) 1px,transparent 1px)!important;background-size:100% 100%,.3rem .3rem,.3rem .3rem!important}
+/* the empty-thread screen covers the area with an opaque canvas-coloured child; the area itself already paints the canvas */
+[data-workspace-area="conversation"]>*{background-color:transparent!important}
 [data-workspace-area="conversation"]::before{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:var(--n-art) center/cover no-repeat;will-change:transform;animation:n-drift 70s ease-in-out infinite alternate}
 [data-workspace-area="conversation"]::after{content:"";position:absolute;left:18px;top:0;width:200px;height:calc(100% + 264px);z-index:-1;pointer-events:none;background:var(--n-log) repeat-y;will-change:transform;animation:n-log 44s linear infinite}
 [data-chat-header]{letter-spacing:.05em}
